@@ -10,17 +10,22 @@ class PostTweet extends Component
 {
 
     public $content = "";
+    public $text_color = "#1f2937";
+    public $background_color = "#ffffff";
 
     public function postTweet() {
         $this->validate([
             'content' => "required|max:500",
         ]);
 
+        // dd($this->text_color);
+        // dd($this->background_color);
+
         Tweet::create([
             'user_id' => Auth::id(),
             'content' => $this->content,
-            // 'bg-color' => '#ff0099',
-            // 'text-color' => '#aa77dd',
+            'background_color' => $this->background_color,
+            'text_color' => $this->text_color,
         ]);
 
         $this->content = ''; 

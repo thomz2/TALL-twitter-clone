@@ -12,8 +12,8 @@ class Tweet extends Model
     protected $fillable = [
         'user_id',
         'content',
-        'bg-color',
-        'text-color',
+        'background_color',
+        'text_color',
     ];
 
 
