@@ -6,3 +6,19 @@
     background: #9333ea;
     color: white;
 }
+
+.not-tailwind {
+    all: revert;
+}
+
+.custom-titles h1 {
+    @apply text-3xl font-bold;
+}
+
+.custom-titles h2 {
+    @apply text-2xl font-semibold;
+}
+
+.custom-titles h3 {
+    @apply text-xl font-medium;
+}

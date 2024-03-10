@@ -23,6 +23,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://cdn.lordicon.com/lordicon.js"></script>
     </head>
 
     <body class="bg-[#494380]">
