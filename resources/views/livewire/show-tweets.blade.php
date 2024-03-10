@@ -20,7 +20,7 @@
                     <div class="relative">
                         <h4 style="color: {{ $tweet->text_color }}" class="font-semibold">{{ $tweet->user->name }}</h4>
                         <p style="color: {{ $tweet->text_color }}" class="text-sm text-gray-600">{{ $tweet->created_at->diffForHumans() }}</p>
-                        <div style="color: {{ $tweet->text_color }}" class="custom-titles">
+                        <div style="color: {{ $tweet->text_color }}" class="markdown-tailwind-parser">
                             @markdown{{ $tweet->content }}@endmarkdown
                         </div>
                     </div>

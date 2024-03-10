@@ -11,14 +11,18 @@
     all: revert;
 }
 
-.custom-titles h1 {
+.markdown-tailwind-parser h1 {
     @apply text-3xl font-bold;
 }
 
-.custom-titles h2 {
+.markdown-tailwind-parser h2 {
     @apply text-2xl font-semibold;
 }
 
-.custom-titles h3 {
+.markdown-tailwind-parser h3 {
     @apply text-xl font-medium;
+}
+
+.markdown-tailwind-parser code {
+    @apply whitespace-pre-wrap;
 }
