@@ -4,7 +4,7 @@
         @forelse ($tweets as $tweet) 
             <li style="background: {{ $tweet->background_color }}" class="p-4 rounded-lg shadow">
                 <div class="relative flex items-start space-x-4">
-                    {{-- <img src="{{ $tweet->user->profile_photo_url }}" alt="{{ $tweet->user->name }}" class="w-10 h-10 rounded-full"> --}}
+                    <img src="{{ $tweet->user->img_url }}" alt="{{ $tweet->user->name }}" class="w-10 h-10 rounded-full">
                     @can('delete', $tweet)
                         <button wire:click='deleteTweet({{$tweet->id}})' class="absolute right-0">
                             <lord-icon

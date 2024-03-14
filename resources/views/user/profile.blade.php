@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <div>USUARIO AQUI: {{ $user->email }}</div>
-    @auth
-        <div>Pass: {{ $user->password }}</div>
-    @endauth --}}
-
     <div class="container mx-auto p-4">
         <div class="max-w-[65%] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             <div 

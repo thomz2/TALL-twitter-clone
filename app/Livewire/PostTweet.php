@@ -18,9 +18,6 @@ class PostTweet extends Component
             'content' => "required|max:500",
         ]);
 
-        // dd($this->text_color);
-        // dd($this->background_color);
-
         Tweet::create([
             'user_id' => Auth::id(),
             'content' => $this->content,

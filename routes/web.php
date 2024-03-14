@@ -26,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 
-Route::get('/users/{user}', [UserController::class, 'show']);
+// Route::get('/users/{user}', [UserController::class, 'show']);
+Route::get('/users/{username}', [UserController::class, 'showProfile']);
 
 Route::middleware('auth')->group(function () {
     Route::post('tweets', [TweetController::class, 'store']);
