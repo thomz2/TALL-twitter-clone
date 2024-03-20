@@ -36,7 +36,7 @@
             <div class="mx-auto w-full sm:p-4">
                 @auth 
                     <div class="sm:px-6">
-                        <h3 class="font-bold text-xl mb-2 mt-4">Fazer Post</h3>
+                        <h3 class="font-bold text-xl mb-2 mt-4 text-[#171717] dark:text-white">Fazer Post</h3>
                         @livewire('post-tweet')
                     </div>
                 @endauth
