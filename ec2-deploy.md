@@ -91,6 +91,7 @@ sudo lsof -i :80 # UTILIZE PARA VER SERVIÇOS RODANDO NA PORTA
 sudo mv /etc/nginx/sites-available/default ~/
 sudo nano /etc/nginx/sites-available/default
 # Coloque root /var/www/TALL-twitter-clone/public
+# Coloque fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
 sudo nginx -t # UTILIZE PARA VER SE AS CONFIGURAÇÕES DE SITES DO NGINX ESTÃO CORRETAS
 sudo systemctl restart nginx
 ```
