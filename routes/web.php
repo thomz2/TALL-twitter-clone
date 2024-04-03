@@ -27,7 +27,13 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('home');
 
 // Route::get('/users/{user}', [UserController::class, 'show']);
-Route::get('/users/{username}', [UserController::class, 'showProfile']);
+Route::get('/users/{id}', function ($id) {
+    $user = User::findOrFail($id);
+    return redirect()->route('users.show', ['username' => $user->name]);
+})->where('id', '[0-9]+');
+
+Route::get('/users/{username}', [UserController::class, 'showProfile'])->name('users.show');
+
 
 Route::middleware('auth')->group(function () {
     Route::post('tweets', [TweetController::class, 'store']);

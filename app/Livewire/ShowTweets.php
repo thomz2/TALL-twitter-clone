@@ -36,6 +36,12 @@ class ShowTweets extends Component
             $this->tweets = Tweet::latest()->get();
     }
 
+    public function test($clicked)
+    {
+        // dd(auth()->user()->id); // retorna o id do usuario que clicou
+        // dd($clicked); // retorna se o usuario clicou no alpine
+    }
+
     public function render()
     {
         return view('livewire.show-tweets', [
