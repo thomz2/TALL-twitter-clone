@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 
-// Route::get('/users/{user}', [UserController::class, 'show']);
 Route::get('/users/{id}', function ($id) {
     $user = User::findOrFail($id);
     return redirect()->route('users.show', ['username' => $user->name]);
