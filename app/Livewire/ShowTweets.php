@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Like;
 use App\Models\Tweet;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
@@ -36,11 +37,17 @@ class ShowTweets extends Component
             $this->tweets = Tweet::latest()->get();
     }
 
-    public function test($clicked)
-    {
-        // dd(auth()->user()->id); // retorna o id do usuario que clicou
-        // dd($clicked); // retorna se o usuario clicou no alpine
-    }
+    // public function getTweetLikes($tweet_id) 
+    // {
+    //     $likes = Like::where('tweet_id', $tweet_id)->get();
+    //     if ($likes->isEmpty()) return [];
+    //     return $likes;
+    // }
+
+    // public function getCountOfTweetLikes($tweet_id)
+    // {
+    //     return sizeof($this->getTweetLikes($tweet_id));
+    // }
 
     public function render()
     {
