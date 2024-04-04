@@ -18,9 +18,18 @@ class UserController extends Controller
     public function showProfile(string $username): View
     {
         $user = User::where('name', $username)
-                        ->first();
+                ->first();
         return view('user.profile', [
             'user' => $user
+        ]);
+    }
+
+    public function configProfile(string $username): View
+    {
+        $user = User::where('name', $username)
+                ->first();
+        return view('user.update', [
+            'user'=> $user
         ]);
     }
 }

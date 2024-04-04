@@ -33,7 +33,6 @@ Route::get('/users/{id}', function ($id) {
 
 Route::get('/users/{username}', [UserController::class, 'showProfile'])->name('users.show');
 
-
 Route::middleware('auth')->group(function () {
     Route::post('tweets', [TweetController::class, 'store']);
 });
@@ -68,4 +67,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
+
+    Route::get('/users/{username}/config', [UserController::class,'configProfile'])->name('users.update');
 });

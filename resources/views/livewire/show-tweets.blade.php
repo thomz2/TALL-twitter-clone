@@ -5,7 +5,7 @@
             <li style="background: {{ $tweet->background_color }}" class="p-4 rounded-lg shadow">
                 <div class="relative flex items-start space-x-4">
                     <a href="{{ route('users.show', ['username' => $tweet->user->name]) }}">
-                        <img src="{{ $tweet->user->img_url }}" alt="{{ $tweet->user->name }}" class="w-10 h-10 rounded-full">
+                        <img src="{{ $tweet->user->img_url }}" alt="profile" class="w-10 h-10 rounded-full">
                     </a>
                     @can('delete', $tweet)
                         <button wire:click='deleteTweet({{ $tweet->id }})' class="absolute right-0">
