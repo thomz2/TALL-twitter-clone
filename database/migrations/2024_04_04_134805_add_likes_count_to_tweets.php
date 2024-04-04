@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tweets', function (Blueprint $table) {
-            $table->string('likes_count')->default(0);
+            $table->unsignedInteger('likes_count')->default(0);
         });
     }
 
