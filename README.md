@@ -2,7 +2,7 @@
 
 <div align="center">   
     <h1>X.md</h1>
-    <h3>Tweeter/X Clone using the TALL stack</h3>
+    <h3>Twitter/X Clone using the TALL stack</h3>
     <p color="gray">Tailwind, Alpine.JS, Laravel, Livewire</p>
 </div>
 
