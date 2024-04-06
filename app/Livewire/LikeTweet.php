@@ -16,7 +16,7 @@ class LikeTweet extends Component
     public function mount(Tweet $tweet)
     {
         $this->tweet = $tweet;
-        $this->countOfLikes = $tweet->likes()->count();
+        $this->countOfLikes = $tweet->likes_count;
         $this->isLiked = $this->isLikedByUser();
     }
 
@@ -32,7 +32,7 @@ class LikeTweet extends Component
     {
         // dd(auth()->user()->id); // retorna o id do usuario que clicou
         // dd($liked); // retorna se o usuario clicou no alpine
-        // dd();
+        
         return $liked ? $this->likeTweet() : $this->dislikeTweet(); 
     }
 
@@ -48,10 +48,12 @@ class LikeTweet extends Component
 
     public function dislikeTweet()
     {
-        Like::where([
+        // Tenho que fazer get()->delete() para ativar o LikeObserver
+        $likes = Like::where([
             'user_id' => auth()->user()->id,
             'tweet_id' => $this->tweet->id,
-        ])->delete();
+        ])->get()[0]->delete();
+
         $this->isLiked = false;
         $this->countOfLikes--;
     }

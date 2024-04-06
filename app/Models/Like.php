@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\LikeObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+#[ObservedBy([LikeObserver::class])]
 class Like extends Model
 {
     protected $fillable = [
