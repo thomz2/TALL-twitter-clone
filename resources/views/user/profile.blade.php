@@ -10,13 +10,7 @@
                 <div class="ml-4 mt-4 sm:mt-0 sm:ml-4 text-center sm:text-left ">
                     <p class="text-xl leading-tight">{{ $user->name }}</p>
                     <p class="text-sm leading-tight text-gray-600">{{ $user->bio }}</p>
-                    <div class="mt-4">
-                        @authusercan($user->id)   
-                            <button class="text-purple-600 text-sm font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-purple-200 transition ease-in duration-300 px-4 py-1">Config</button>
-                        @elseauthusercan
-                            <button class="text-purple-600 text-sm font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-purple-200 transition ease-in duration-300 px-4 py-1">Follow</button>
-                        @endauthusercan
-                    </div>
+                    @livewire('follow-tab', ['user' => $user])
                 </div>
             </div>
             @auth

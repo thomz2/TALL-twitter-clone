@@ -38,24 +38,24 @@ class LikeTweet extends Component
 
     public function likeTweet()
     {
+        $this->countOfLikes++;
         Like::create([
             'user_id' => auth()->user()->id,
             'tweet_id' => $this->tweet->id,
         ]);
         $this->isLiked = true;
-        $this->countOfLikes++;
     }
 
     public function dislikeTweet()
     {
+        $this->countOfLikes--;
         // Tenho que fazer get()->delete() para ativar o LikeObserver
-        $likes = Like::where([
+        Like::where([
             'user_id' => auth()->user()->id,
             'tweet_id' => $this->tweet->id,
         ])->get()[0]->delete();
 
         $this->isLiked = false;
-        $this->countOfLikes--;
     }
 
     public function render()
