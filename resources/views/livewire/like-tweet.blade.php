@@ -2,7 +2,7 @@
     style="color: {{ $tweet->text_color }}" 
     class="mt-2 italic flex flex-row items-center cursor-pointer"
     x-data="{ isLiked: @entangle('isLiked') }"
-    x-on:click.prevent="isLiked = !isLiked; $wire.likeOrDislikeTweet(isLiked, {{ $tweet->id }})"
+    x-on:click.prevent="isLiked = !isLiked; $wire.likeOrDislikeTweet()"
 >
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
         :style="isLiked ? 'fill: {{ $tweet->text_color }};' : 'stroke: {{ $tweet->text_color }};'"
