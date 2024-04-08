@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Like;
 use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,21 +34,18 @@ class ShowTweets extends Component
     {
         if ($this->user)
             $this->tweets = Tweet::latest()->where('user_id', $this->user->id)->get();
-        else 
+        else if (Auth::check()){            
+            $this->tweets = Tweet::latest()
+                ->whereIn(
+                    'user_id',
+                    Auth::user()->following()->get()->pluck('id')->add(Auth::user()->id)
+                    //                                pluck ~= map
+                )
+                ->get();
+        } else {
             $this->tweets = Tweet::latest()->get();
+        }
     }
-
-    // public function getTweetLikes($tweet_id) 
-    // {
-    //     $likes = Like::where('tweet_id', $tweet_id)->get();
-    //     if ($likes->isEmpty()) return [];
-    //     return $likes;
-    // }
-
-    // public function getCountOfTweetLikes($tweet_id)
-    // {
-    //     return sizeof($this->getTweetLikes($tweet_id));
-    // }
 
     public function render()
     {
