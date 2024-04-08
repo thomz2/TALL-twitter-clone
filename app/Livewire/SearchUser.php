@@ -13,10 +13,12 @@ class SearchUser extends Component
     
     public function updatedQuery()
     {
-        $this->users = User::where('name', 'like', '%'.$this->query.'%')
-            ->limit(10)
-            ->get()
-            ->toArray();
+        if ($this->query)
+            $this->users = User::where('name', 'like', '%'.$this->query.'%')
+                ->limit(10)
+                ->get()
+                ->toArray();
+        else $this->users = [];
     }
     
     public function render()
