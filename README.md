@@ -9,7 +9,8 @@
 ## Todo
 
 #### ✅ user auth<br>
-#### 🕒 user background and profile img storage<br>
+#### 🕒 user config<br>
+#### ✅ search input<br>
 #### ✅ likes logic<br>
 #### ✅ profile page<br>
 #### 🕒 mobile responsivity<br>
