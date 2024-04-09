@@ -10,6 +10,7 @@ use App\Livewire\Auth\Passwords\Email;
 use App\Livewire\Auth\Passwords\Reset;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
+use App\Livewire\UpdateUserForm;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -68,5 +69,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 
-    Route::get('/users/{username}/config', [UserController::class,'configProfile'])->name('users.update');
+    Route::get('/users/{username}/config', [UserController::class,'configProfile'])->name('users.form');
+    Route::post('/users', [UpdateUserForm::class, 'updateUser'])->name('users.edit');
 });

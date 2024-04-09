@@ -4,7 +4,7 @@
     <div class="container mx-auto p-4">
         <div class="max-w-[65%] mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             <div 
-                style="background: url({{ $user->background_url }})" 
+                style="background-image: url({{ $user->background_url }})" 
                 class="relative sm:flex sm:items-center px-6 py-8 bg-cover"
             >
                 <img class="block sm:mx-0 sm:flex-shrink-0 h-16 sm:h-24 rounded-full" src="{{ $user->img_url }}" alt="Imagem de Perfil">
@@ -15,7 +15,7 @@
                 </div>
                 @authusercan($user->id)   
                     <div class="absolute top-5 right-6">
-                        <a href="{{ route('users.update', ['username' => $user->name]) }}">
+                        <a href="{{ route('users.form', ['username' => $user->name]) }}">
                             Config
                         </a>
                     </div>
