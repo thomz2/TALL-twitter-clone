@@ -30,9 +30,6 @@ class LikeTweet extends Component
 
     public function likeOrDislikeTweet()
     {
-        // dd(auth()->user()->id); // retorna o id do usuario que clicou
-        // dd($liked); // retorna se o usuario clicou no alpine
-        
         return $this->isLiked ? $this->likeTweet() : $this->dislikeTweet(); 
     }
 

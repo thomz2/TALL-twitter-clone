@@ -1,6 +1,5 @@
 <div>
     <div>
-        <!-- The only way to do great work is to love what you do. - Steve Jobs -->
         <form wire:submit.prevent="postTweet">
             <div class="w-full my-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                 <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">

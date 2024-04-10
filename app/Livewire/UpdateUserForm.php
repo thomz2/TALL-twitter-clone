@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Hash;
 use Livewire\Component;
 
 class UpdateUserForm extends Component
@@ -27,26 +28,25 @@ class UpdateUserForm extends Component
     
     public function updateUser()
     {
+
         $this->validate([
-            'name' => ['required', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            // 'password' => ['required', 'min:8', 'same:passwordConfirmation'],
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['min:8', 'same:passwordConfirmation'],
+        ]);
+
+        $this->user->update([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => Hash::make($this->password),
         ]);
         
-        $this->user->name = $this->name;
-        $this->user->email = $this->email;
-        if ($this->password) 
-            $this->user->password = $this->password;
-        dd($this->user);
-        $this->user->save();
-
-
         return redirect(route('users.show', ["username" => $this->user->name]))
             ->with('success', 'Usuário alterado com sucesso!');
     }
 
     public function render()
     {
-        return view('livewire.update-user-form', );
+        return view('livewire.update-user-form');
     }
 }
