@@ -1,6 +1,6 @@
 <div>
 
-    {{-- @if (Route::is('home'))         --}}
+    @if (!$this->user)        
         @auth
             <div 
                 x-data="{ select: false }" 
@@ -22,7 +22,7 @@
                 </span>
             </div>
         @endauth
-    {{-- @endif --}}
+    @endif
     
     <ul class="space-y-4">  
         @foreach ($tweets as $tweet) 
