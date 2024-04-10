@@ -13,7 +13,8 @@ class ShowTweets extends Component
     public $tweets = [];
     public $user;
     public $isAllTweets;
-    public $tweetAmount = 5;
+    public $tweetAmount = 3;
+    public $loads = 0;
 
     public function mount($user = null) {
         $this->user = $user;
@@ -24,14 +25,32 @@ class ShowTweets extends Component
     public function updateIsAllTweets($value)
     {
         $this->isAllTweets = $value;
-        $this->reloadTweets();
+        $this->loads = 0;
+        
+        // Fazer uma query aqui para pegar os {{ tweetAmount }} primeiros
+        $tweetsQueryBuilder = Tweet::latest();
+        if (Auth::check() && !$this->isAllTweets) {
+            $tweetsQueryBuilder = $tweetsQueryBuilder
+                ->whereIn(
+                    'user_id',
+                    Auth::user()
+                        ->following()
+                        ->get()
+                        ->pluck('id')
+                ); 
+        }
+
+        $this->tweets = $tweetsQueryBuilder->take($this->tweetAmount)->get();
     }
 
     public function deleteTweet($tweetId) {
         $tweet = Tweet::find($tweetId);
         if ($tweet) {
             $tweet->delete();
-            $this->reloadTweets();
+            // Preciso remover assim, pois se eu fizer reload, vai repetir tweets ja existentes
+            $this->tweets = $this->tweets->reject(function ($tweet) use ($tweetId) {
+                return $tweet->id === $tweetId;
+            });
         }
     }
 
@@ -59,7 +78,14 @@ class ShowTweets extends Component
                 );
         } 
 
-        $this->tweets = $tweetsQueryBuilder->take($this->tweetAmount)->get();
+        $newTweets = $tweetsQueryBuilder->offset($this->tweetAmount*$this->loads)->limit($this->tweetAmount)->get();
+        $this->tweets = $this->loads == 0 ? $newTweets : $this->tweets->concat($newTweets);
+    }
+
+    public function loadMore()
+    {
+        $this->loads++;
+        $this->reloadTweets();
     }
 
     public function render()
