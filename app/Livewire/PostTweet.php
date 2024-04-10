@@ -18,7 +18,7 @@ class PostTweet extends Component
             'content' => "required|max:500",
         ]);
 
-        Tweet::create([
+        $tweet = Tweet::create([
             'user_id' => Auth::id(),
             'content' => $this->content,
             'background_color' => $this->background_color,
@@ -26,7 +26,7 @@ class PostTweet extends Component
         ]);
 
         $this->content = ''; 
-        $this->dispatch('tweet-posted'); 
+        $this->dispatch('tweet-posted', ["tweetId" => $tweet->id]); 
     }
 
     public function render()

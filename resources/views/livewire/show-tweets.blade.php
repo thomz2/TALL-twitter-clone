@@ -1,28 +1,30 @@
 <div>
 
-    <div 
-        x-data="{ selected: true }" 
-        class="my-6 relative w-full mt-4 rounded-md border h-10 p-1 bg-gray-200"
-    >
-        <div class="relative w-full h-full flex items-center">
-            <div @click="selected=!selected" class="w-full flex justify-center text-gray-400 cursor-pointer">
-                <button>Usuários que você segue</button>
+    @auth
+        <div 
+            x-data="{ select: false }" 
+            class="my-6 relative w-full mt-4 rounded-md border h-10 p-1 bg-gray-200"
+        >
+            <div class="relative w-full h-full flex items-center">
+                <div @click="select = !select; $wire.updateIsAllTweets(0)" class="w-full flex justify-center text-gray-400 cursor-pointer">
+                    <button>Usuários que você segue</button>
+                </div>
+                <div @click="select = !select; $wire.updateIsAllTweets(1)" class="w-full flex justify-center text-gray-400 cursor-pointer">
+                    <button>Todos os usuários</button>
+                </div>
             </div>
-            <div @click="selected=!selected" class="w-full flex justify-center text-gray-400 cursor-pointer">
-                <button>Todos os usuários</button>
-            </div>
+
+            <span 
+                :class="{ 'left-1/2 -ml-1 text-gray-800':select, 'left-1 text-purple-600 font-semibold':!select }"
+                x-text="!select ? 'Seguindo' : 'Todos'"
+                class="bg-white shadow text-sm flex items-center justify-center w-1/2 rounded h-[1.88rem] transition-all duration-150 ease-linear top-[4px] absolute">
+            </span>
         </div>
-
-        <span 
-            :class="{ 'left-1/2 -ml-1 text-gray-800':!selected, 'left-1 text-purple-600 font-semibold':selected }"
-            x-text="selected ? 'Seguindo' : 'Todos'"
-            class="bg-white shadow text-sm flex items-center justify-center w-1/2 rounded h-[1.88rem] transition-all duration-150 ease-linear top-[4px] absolute">
-        </span>
-    </div>
-
+    @endauth
+    
     <ul class="space-y-4">  
         @forelse ($tweets as $tweet) 
-            <li style="background: {{ $tweet->background_color }}" class="p-4 rounded-lg shadow">
+            <li wire:key="tweet-{{ $tweet->id }}" style="background: {{ $tweet->background_color }}" class="p-4 rounded-lg shadow">
                 <div class="relative flex items-start space-x-4">
                     <a href="{{ route('users.show', ['username' => $tweet->user->name]) }}">
                         <img src="{{ $tweet->user->img_url }}" alt="profile" class="w-10 h-10 rounded-full">
@@ -48,7 +50,7 @@
                             @markdown{{ $tweet->content }}@endmarkdown
                         </div>
                         @auth
-                            @livewire('like-tweet', ['tweet' => $tweet])
+                            @livewire('like-tweet', ['tweet' => $tweet], key('tweet-'.$tweet->id))
                         @endauth
                     </div>
                 </div>
