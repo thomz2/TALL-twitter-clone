@@ -32,7 +32,7 @@ class UpdateUserForm extends Component
         $this->validate([
             'name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['min:8', 'same:passwordConfirmation'],
+            'password' => ['required', 'min:8', 'same:passwordConfirmation'],
         ]);
 
         $this->user->update([

@@ -14,6 +14,7 @@ class ShowTweets extends Component
 
     public $tweets = [];
     public $user;
+    public $seeAllTweets;
 
     public function mount($user = null) {
         $this->$user = $user;
