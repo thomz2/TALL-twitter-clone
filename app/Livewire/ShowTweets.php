@@ -46,9 +46,9 @@ class ShowTweets extends Component
         $tweetsQueryBuilder = Tweet::latest();
 
         if ($this->user)
-            $this->tweets = $tweetsQueryBuilder->where('user_id', $this->user->id)->get();
+            $tweetsQueryBuilder = $tweetsQueryBuilder->where('user_id', $this->user->id);
         else if (Auth::check() && !$this->isAllTweets){   
-            $this->tweets = $tweetsQueryBuilder
+            $tweetsQueryBuilder = $tweetsQueryBuilder
                 ->whereIn(
                     'user_id',
                     Auth::user()
@@ -56,11 +56,10 @@ class ShowTweets extends Component
                         ->get()
                         ->pluck('id')
                         // pluck ~= map
-                )
-                ->get();
-        } else {
-            $this->tweets = $tweetsQueryBuilder->get();
-        }
+                );
+        } 
+
+        $this->tweets = $tweetsQueryBuilder->take($this->tweetAmount)->get();
     }
 
     public function render()
