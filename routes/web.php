@@ -69,6 +69,9 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 
-    Route::get('/users/{username}/config', [UserController::class,'configProfile'])->name('users.form');
-    Route::post('/users', [UpdateUserForm::class, 'updateUser'])->name('users.edit');
+    // TODO: criar middleware para config ser apenas pro config normal
+    Route::middleware('auth')->group(function () {
+        Route::get('/users/{username}/config', [UserController::class, 'configProfile'])->name('users.form');
+        Route::post('/users', [UpdateUserForm::class, 'updateUser'])->name('users.edit');
+    });
 });

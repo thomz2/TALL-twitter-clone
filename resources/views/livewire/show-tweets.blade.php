@@ -1,5 +1,4 @@
 <div>
-
     @if (!$this->user)        
         @auth
             <div 
@@ -64,7 +63,7 @@
         <div class="w-full flex justify-center py-8">
             <button 
                 wire:click.prevent='loadMore'
-                class="w-[30%] self-center text-purple-600 text-sm font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-purple-200 transition ease-in duration-300 px-4 py-2"
+                class="w-full sm:w-[30%] self-center text-purple-600 text-sm font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-purple-200 transition ease-in duration-300 px-4 py-2"
             >
                 Quero ver mais!
             </button>
