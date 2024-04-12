@@ -1,5 +1,5 @@
-<div class="w-full bg-white h-screen bg-slate-200">
-    <a href="{{ route('users.show', ['username' => $user->name]) }}" class="text-white z-10 fixed top-2 left-2">
+<div class="w-full min-h-screen h-screen bg-slate-200">
+    <a href="{{ route('users.show', ['username' => $user->name]) }}" class="text-gray-400 z-10 fixed top-2 left-2">
         Voltar
     </a>
     <form 

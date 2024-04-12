@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <a href="{{ route('home') }}" class="text-white z-10 fixed top-2 left-2">
+    <div class="">
+        <a href="{{ route('home') }}" class="text-gray-400 z-10 fixed top-2 left-2">
             Voltar
         </a>
-        <div class="mx-auto bg-white overflow-hidden">
+        <div class="mx-auto bg-slate-200 min-h-screen overflow-hidden">
             <div 
                 style="background-image: url({{ $user->background_url }})" 
                 class="relative sm:flex sm:items-center px-6 py-32 bg-cover bg-top"

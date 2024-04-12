@@ -26,7 +26,7 @@
         <script src="https://cdn.lordicon.com/lordicon.js"></script>
     </head>
 
-    <body class="bg-[#494380]">
+    <body class="bg-slate-200">
         @yield('body')
     </body>
 </html>

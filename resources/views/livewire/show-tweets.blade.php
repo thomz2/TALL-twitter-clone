@@ -3,11 +3,11 @@
         @auth
             <div 
                 x-data="{ select: false }" 
-                class="my-6 relative w-full mt-4 rounded-md border h-10 p-1 bg-gray-200"
+                class="my-6 relative w-full mt-4 rounded-md border h-10 p-1 bg-gray-300"
             >
                 <div class="relative w-full h-full flex items-center">
                     <div @click="select = !select; $wire.updateIsAllTweets(0)" class="w-full flex justify-center text-gray-400 cursor-pointer">
-                        <button>Usuários que você segue</button>
+                        <button>Que você segue</button>
                     </div>
                     <div @click="select = !select; $wire.updateIsAllTweets(1)" class="w-full flex justify-center text-gray-400 cursor-pointer">
                         <button>Todos os usuários</button>
