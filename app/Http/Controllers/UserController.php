@@ -9,8 +9,9 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function showProfile(string $username): View
+    public function showProfile(string $username)
     {
+        if (!Auth::check()) return redirect()->route('login');
         $user = User::where('name', $username)
             ->first();
         return view('user.profile', [

@@ -15,19 +15,25 @@
         </div>
         <div class="px-4 py-10 flex flex-col gap-2 justify-center items-center">
             <div class="flex flex-col gap-2 w-full sm:w-[65%]">
-                <label for="">Novo nome</label>
+                <label for="name">Novo nome</label>
                 <input wire:model.live="name">
                 @error('name')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
-                <label for="">Novo email</label>
+                <label for="bio">Nova bio</label>
+                <input wire:model.live="bio">
+                @error('bio')
+                    <p class="text-sm text-red-600">{{ $message }}</p>
+                @enderror
+
+                <label for="email">Novo email</label>
                 <input wire:model.live="email">
                 @error('email')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
-                <label for="">Senha Nova</label>
+                <label for="password">Senha Nova</label>
                 <input wire:model.live="password" type="password">
                 @error('password')
                     <p class="text-sm text-red-600">{{ $message }}</p>
