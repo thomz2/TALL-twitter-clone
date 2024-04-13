@@ -26,14 +26,13 @@ class UpdateUserForm extends Component
         $this->bio = $this->user->bio;
         $this->email = $this->user->email;
     }
-    
+
     public function updateUser()
     {
-        # TODO Colocar umas regras de unicidade
         $this->validate([
-            'name' => ['required'],
+            'name' => ['unique:users,name,' . $this->user->id, 'required'],
             'bio' => ['required', 'max:50'],
-            'email' => ['required', 'email'],
+            'email' => ['unique:users,email,' . $this->user->id, 'required', 'email'],
             'password' => ['sometimes', 'min:8', 'same:passwordConfirmation'],
             'profile_img' => 'sometimes|nullable|image|max:1024'
         ]);
