@@ -1,6 +1,6 @@
 <div class="w-full min-h-screen h-screen bg-slate-200">
     <a href="{{ route('users.show', ['username' => $user->name]) }}" class="text-gray-400 z-10 fixed top-2 left-2">
-        Voltar
+        Perfil
     </a>
     <form 
         class="flex flex-col gap-2"
@@ -16,14 +16,24 @@
         <div class="px-4 py-10 flex flex-col gap-2 justify-center items-center">
             <div class="flex flex-col gap-2 w-full sm:w-[65%]">
                 <label for="profile_img">Foto de Perfil</label>
-                <input class="p-2 block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model.live="profile_img" accept="image/png, image/jpeg" type="file">
+                <input 
+                    class="p-2 block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                    wire:model.live="profile_img" 
+                    accept="image/png, image/jpeg" 
+                    type="file"
+                >
                 <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG ou JPEG.</p>
                 @error('profile_img')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
                 <label for="background_img">Background</label>
-                <input class="p-2 block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" wire:model.live="background_img" accept="image/png, image/jpeg" type="file">
+                <input 
+                    class="p-2 block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                    wire:model.live="background_img" 
+                    accept="image/png, image/jpeg" 
+                    type="file"
+                >
                 <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG ou JPEG.</p>
                 @error('background_img')
                     <p class="text-sm text-red-600">{{ $message }}</p>

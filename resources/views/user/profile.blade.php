@@ -3,7 +3,7 @@
 @section('content')
     <div class="">
         <a href="{{ route('home') }}" class="text-gray-400 z-10 fixed top-2 left-2">
-            Voltar
+            Home
         </a>
         <div class="mx-auto bg-slate-200 min-h-screen overflow-hidden">
             <div 

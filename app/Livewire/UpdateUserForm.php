@@ -3,23 +3,21 @@
 namespace App\Livewire;
 
 use Hash;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class UpdateUserForm extends Component
 {
+    use WithFileUploads;
+
     public $user;
-    /** @var string */
     public $profile_img;
     public $background_img;
     public $name;
     public $bio;
-    /** @var string */
     public $email;
-
-    /** @var string */
     public $password = '';
-
-    /** @var string */
     public $passwordConfirmation = '';
 
     public function mount()
@@ -31,19 +29,32 @@ class UpdateUserForm extends Component
     
     public function updateUser()
     {
-
+        # TODO Colocar umas regras de unicidade
         $this->validate([
             'name' => ['required'],
             'bio' => ['required', 'max:50'],
             'email' => ['required', 'email'],
             'password' => ['sometimes', 'min:8', 'same:passwordConfirmation'],
+            'profile_img' => 'sometimes|nullable|image|max:1024'
         ]);
+
+        $profile_img_url = null;
+        if ($this->profile_img) {
+            $profile_img_url = $this->profile_img->store('profile_img', 's3');
+            $profile_img_url = 'https://mdwitter.s3.amazonaws.com/' . $profile_img_url;
+        }
 
         $this->user->update([
             'name' => $this->name,
             'bio' => $this->bio,
             'email' => $this->email,
         ]);
+
+        if (isset($profile_img_url)) {
+            $this->user->update([
+                'img_url' => $profile_img_url
+            ]);
+        }
 
         if ($this->password)
             $this->user->update([
