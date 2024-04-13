@@ -9,9 +9,10 @@ class UpdateUserForm extends Component
 {
     public $user;
     /** @var string */
+    public $profile_img;
+    public $background_img;
     public $name;
     public $bio;
-
     /** @var string */
     public $email;
 
@@ -35,21 +36,18 @@ class UpdateUserForm extends Component
             'name' => ['required'],
             'bio' => ['required', 'max:50'],
             'email' => ['required', 'email'],
-            'password' => ['min:8', 'same:passwordConfirmation'],
+            'password' => ['sometimes', 'min:8', 'same:passwordConfirmation'],
+        ]);
+
+        $this->user->update([
+            'name' => $this->name,
+            'bio' => $this->bio,
+            'email' => $this->email,
         ]);
 
         if ($this->password)
             $this->user->update([
-                'name' => $this->name,
-                'bio' => $this->bio,
-                'email' => $this->email,
                 'password' => Hash::make($this->password),
-            ]);
-        else 
-            $this->user->update([
-                'name' => $this->name,
-                'bio' => $this->bio,
-                'email' => $this->email,
             ]);
         
         return redirect(route('users.show', ["username" => $this->user->name]))
