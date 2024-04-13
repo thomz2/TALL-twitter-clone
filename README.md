@@ -16,7 +16,7 @@
 #### ✅ mobile responsivity<br>
 #### ✅ followers logic<br>
 #### ✅ better UI<br>
-#### 🕒 AWS S3 storage<br>
+#### ✅ AWS S3 storage<br>
 #### ✅ AWS EC2 deploy (markdown explaining in portuguese)<br>
 #### ✅ AWS RDS database<br>
 #### 🕒 AWS non-relational database for crud logs<br>
