@@ -13,9 +13,9 @@
 #### ✅ search input<br>
 #### ✅ likes logic<br>
 #### ✅ profile page<br>
-#### 🕒 mobile responsivity<br>
+#### ✅ mobile responsivity<br>
 #### ✅ followers logic<br>
-#### 🕒 better UI<br>
+#### ✅ better UI<br>
 #### 🕒 AWS S3 storage<br>
 #### ✅ AWS EC2 deploy (markdown explaining in portuguese)<br>
 #### ✅ AWS RDS database<br>
