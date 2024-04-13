@@ -51,6 +51,7 @@ class UpdateUserForm extends Component
         ]);
 
         if (isset($profile_img_url)) {
+            Storage::disk('s3')->delete(substr($this->user->img_url, strlen('https://mdwitter.s3.amazonaws.com/')));
             $this->user->update([
                 'img_url' => $profile_img_url
             ]);
