@@ -64,7 +64,7 @@ composer --version
 sudo chmod  o+w /var/www
 cd /var/www/
 # Coloque o repositório a sua escolha
-git clone https://github.com/thomz2/TALL-twitter-clone.git
+git clone https://github.com/thomz2/tall-twitter-clone.git
 cd tall-twitter-clone/
 cp .env.example .env
 nano .env
