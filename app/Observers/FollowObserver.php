@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Follow;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
+use Carbon\Carbon;
 
 class FollowObserver
 {
@@ -33,7 +34,8 @@ class FollowObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Follow ' . $follow->id . ' Criado',
-            'data' => json_encode($follow)
+            'data' => json_encode($follow),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -69,7 +71,8 @@ class FollowObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Follow ' . $follow->id . ' Deletado',
-            'data' => json_encode($follow)
+            'data' => json_encode($follow),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

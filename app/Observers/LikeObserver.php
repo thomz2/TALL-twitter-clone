@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Tweet;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
+use Carbon\Carbon;
 
 class LikeObserver
 {
@@ -37,7 +38,8 @@ class LikeObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Like ' . $like->id . ' Criado',
-            'data' => json_encode($like)
+            'data' => json_encode($like),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -77,7 +79,8 @@ class LikeObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Like ' . $like->id . ' Deletado',
-            'data' => json_encode($like)
+            'data' => json_encode($like),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

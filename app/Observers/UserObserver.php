@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\User;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
+use Carbon\Carbon;
 
 class UserObserver
 {
@@ -33,7 +34,8 @@ class UserObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'User ' . $user->id . ' Criado',
-            'data' => json_encode($user)
+            'data' => json_encode($user),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -69,7 +71,8 @@ class UserObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'User ' . $user->id . ' Atualizado',
-            'data' => json_encode($user)
+            'data' => json_encode($user),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Tweet;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
+use Carbon\Carbon;
 
 class TweetObserver
 {
@@ -33,7 +34,8 @@ class TweetObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Tweet ' . $tweet->id . ' Criado',
-            'data' => json_encode($tweet)
+            'data' => json_encode($tweet),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -69,7 +71,8 @@ class TweetObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Tweet ' . $tweet->id . ' Deletado',
-            'data' => json_encode($tweet)
+            'data' => json_encode($tweet),
+            'time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
