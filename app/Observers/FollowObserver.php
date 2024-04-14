@@ -33,6 +33,7 @@ class FollowObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Follow ' . $follow->id . ' Criado',
+            'data' => json_encode($follow)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -68,6 +69,7 @@ class FollowObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Follow ' . $follow->id . ' Deletado',
+            'data' => json_encode($follow)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

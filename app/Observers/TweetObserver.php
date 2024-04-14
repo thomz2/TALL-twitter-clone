@@ -33,6 +33,7 @@ class TweetObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Tweet ' . $tweet->id . ' Criado',
+            'data' => json_encode($tweet)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -68,6 +69,7 @@ class TweetObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Tweet ' . $tweet->id . ' Deletado',
+            'data' => json_encode($tweet)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

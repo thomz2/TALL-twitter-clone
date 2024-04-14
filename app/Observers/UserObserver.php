@@ -33,6 +33,7 @@ class UserObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'User ' . $user->id . ' Criado',
+            'data' => json_encode($user)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -68,6 +69,7 @@ class UserObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'User ' . $user->id . ' Atualizado',
+            'data' => json_encode($user)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

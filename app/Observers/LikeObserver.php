@@ -37,6 +37,7 @@ class LikeObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Like ' . $like->id . ' Criado',
+            'data' => json_encode($like)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -76,6 +77,7 @@ class LikeObserver
         $item = [
             'log_key' => $log_id,
             'log' => 'Like ' . $like->id . ' Deletado',
+            'data' => json_encode($like)
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);

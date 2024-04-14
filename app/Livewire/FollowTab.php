@@ -40,8 +40,8 @@ class FollowTab extends Component
     {
         // Auth::user()->following()->attach($this->user->id);
         Follow::create([
-            'user_id' => $this->user->id,
-            'follower_id' => Auth::user()->id 
+            'user_id' => Auth::user()->id,
+            'follower_id' => $this->user->id 
         ]);
         $this->followers++;    
     }
@@ -50,8 +50,8 @@ class FollowTab extends Component
     {
         // Auth::user()->following()->detach($this->user->id);    
         Follow::where([
-            'user_id' => $this->user->id,
-            'follower_id' => Auth::user()->id 
+            'user_id' => Auth::user()->id,
+            'follower_id' => $this->user->id 
         ])->get()[0]->delete();
         $this->followers--;    
     }
