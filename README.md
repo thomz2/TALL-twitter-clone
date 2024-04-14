@@ -20,4 +20,3 @@
 #### ✅ AWS EC2 deploy (markdown explaining in portuguese)<br>
 #### ✅ AWS RDS database<br>
 #### ✅ AWS non-relational database for crud logs<br>
-#### 🕒 cloud scaling<br>
