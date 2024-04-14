@@ -38,13 +38,21 @@ class FollowTab extends Component
 
     public function followUser()
     {
-        Auth::user()->following()->attach($this->user->id);
+        // Auth::user()->following()->attach($this->user->id);
+        Follow::create([
+            'user_id' => $this->user->id,
+            'follower_id' => Auth::user()->id 
+        ]);
         $this->followers++;    
     }
 
     public function unfollowUser()
     {
-        Auth::user()->following()->detach($this->user->id);    
+        // Auth::user()->following()->detach($this->user->id);    
+        Follow::where([
+            'user_id' => $this->user->id,
+            'follower_id' => Auth::user()->id 
+        ])->get()[0]->delete();
         $this->followers--;    
     }
 

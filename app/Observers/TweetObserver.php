@@ -2,21 +2,17 @@
 
 namespace App\Observers;
 
-use App\Models\Like;
 use App\Models\Tweet;
 use Aws\DynamoDb\DynamoDbClient;
 use Aws\DynamoDb\Marshaler;
 
-class LikeObserver
+class TweetObserver
 {
     /**
-     * Handle the Like "created" event.
+     * Handle the Tweet "created" event.
      */
-    public function created(Like $like): void
+    public function created(Tweet $tweet): void
     {
-        $tweet = Tweet::find($like->tweet_id);
-        $tweet->increment("likes_count");
-
         $dynamoDb = new DynamoDbClient([
             'region' => env('AWS_DEFAULT_REGION'),
             'version' => 'latest',
@@ -36,7 +32,7 @@ class LikeObserver
 
         $item = [
             'log_key' => $log_id,
-            'log' => 'Like ' . $like->id . ' Criado',
+            'log' => 'Tweet ' . $tweet->id . ' Criado',
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -45,17 +41,13 @@ class LikeObserver
             'TableName' => 'mdwitter-logs',
             'Item' => $dadosFormatados,
         ]);
-        
     }
 
     /**
-     * Handle the Like "deleted" event.
+     * Handle the Tweet "deleted" event.
      */
-    public function deleted(Like $like): void
+    public function deleted(Tweet $tweet): void
     {
-        $tweet = Tweet::find($like->tweet_id);
-        $tweet->decrement("likes_count");
-
         $dynamoDb = new DynamoDbClient([
             'region' => env('AWS_DEFAULT_REGION'),
             'version' => 'latest',
@@ -75,7 +67,7 @@ class LikeObserver
 
         $item = [
             'log_key' => $log_id,
-            'log' => 'Like ' . $like->id . ' Deletado',
+            'log' => 'Tweet ' . $tweet->id . ' Deletado',
         ];
 
         $dadosFormatados = $marshaler->marshalItem($item);
@@ -85,5 +77,4 @@ class LikeObserver
             'Item' => $dadosFormatados,
         ]);
     }
-
 }
