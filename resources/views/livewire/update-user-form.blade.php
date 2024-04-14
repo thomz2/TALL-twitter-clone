@@ -8,7 +8,7 @@
     >
         @csrf
         <div 
-            class="relative py-32 bg-top bg-cover"
+            class="relative py-32 bg-cover"
             style="background-image: url({{ $user->background_url }})" 
         >
             <img class="absolute left-[50%] -translate-x-1/2 -bottom-12 h-28 rounded-full" src="{{ $user->img_url }}" alt="Imagem de Perfil">
@@ -22,7 +22,7 @@
                     accept="image/png, image/jpeg" 
                     type="file"
                 >
-                <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG ou JPEG.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG ou JPEG.</p>
                 @error('profile_img')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -34,7 +34,7 @@
                     accept="image/png, image/jpeg" 
                     type="file"
                 >
-                <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG ou JPEG.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG ou JPEG.</p>
                 @error('background_img')
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror

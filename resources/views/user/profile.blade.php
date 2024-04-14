@@ -8,7 +8,7 @@
         <div class="mx-auto bg-slate-200 min-h-screen overflow-hidden">
             <div 
                 style="background-image: url({{ $user->background_url }})" 
-                class="relative sm:flex sm:items-center px-6 py-32 bg-cover bg-top"
+                class="relative sm:flex sm:items-center px-6 py-32 bg-cover"
             >
                 <img class="absolute left-[50%] -translate-x-1/2 -bottom-12 h-28 rounded-full" src="{{ $user->img_url }}" alt="Imagem de Perfil">
             </div>
