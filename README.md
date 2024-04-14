@@ -9,7 +9,7 @@
 ## Todo
 
 #### ✅ user auth<br>
-#### 🕒 user config<br>
+#### ✅ user config<br>
 #### ✅ search input<br>
 #### ✅ likes logic<br>
 #### ✅ profile page<br>
@@ -19,5 +19,5 @@
 #### ✅ AWS S3 storage<br>
 #### ✅ AWS EC2 deploy (markdown explaining in portuguese)<br>
 #### ✅ AWS RDS database<br>
-#### 🕒 AWS non-relational database for crud logs<br>
+#### ✅ AWS non-relational database for crud logs<br>
 #### 🕒 cloud scaling<br>
