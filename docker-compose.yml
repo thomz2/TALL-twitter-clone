@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  laravel:
+    container_name: laravel
+    build: . # same directory as the Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 9000:80 # host:container
+    depends_on:
+      - mysql_db
+      # - minio
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8989:80
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - laravel
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: twitter_clone
+    ports:
+      - 3307:3306
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 9001:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  # verify later
+  # minio:
+  #   image: 'minio/minio:latest'
+  #   ports:
+  #     - 5000:5000
+  #     - 4900:4900
+  #   environment:
+  #     MINIO_ROOT_USER: 'root'
+  #     MINIO_ROOT_PASSWORD: 'root'
+  #   volumes:
+  #     - 'minio_data:/data/minio'
+  #   command: minio server /data/minio --console-address ":4900"
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+  #     retries: 3
+  #     timeout: 5s
+
+volumes:
+  minio_data:
