@@ -1,35 +1,53 @@
-# Use a imagem oficial do PHP como base
 FROM php:8.2-fpm
 
-# Instale as dependências do Laravel
-RUN apt-get update && \
-    apt-get install -y \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
 
-# Instale o Composer
+# Set working directory
+WORKDIR /var/www
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libonig-dev \
+    libzip-dev \
+    libgd-dev
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+#Mine
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-configure gd --with-external-gd
+RUN docker-php-ext-install gd
+
+# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Extensões necessárias
-RUN docker-php-ext-install pdo pdo_mysql
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
-# Defina o diretório de trabalho
-WORKDIR /var/www/html
+# Copy existing application directory contents
+COPY . /var/www
 
-# Instale as dependências do Laravel usando o Composer
-COPY composer.json composer.lock ./
-RUN composer install --no-scripts --no-autoloader
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
 
-# Copie o código-fonte do Laravel
-COPY . .
+# Change current user to www
+USER www
 
-# Configure as permissões e gere o autoload do Composer
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage \
-    && chmod -R 775 /var/www/html/bootstrap/cache \
-    && composer dump-autoload
+# Expose port 9000 and start php-fpm server
+EXPOSE 9000
+CMD ["php-fpm"]

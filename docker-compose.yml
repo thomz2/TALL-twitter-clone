@@ -1,57 +1,65 @@
-version: "3.9"
+version: '3'
 services:
-  laravel:
-    container_name: laravel
-    build: . # same directory as the Dockerfile
-    volumes:
-      - .:/var/www/html
-    ports:
-      - 9000:80 # host:container
-    depends_on:
-      - mysql_db
-      # - minio
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - 8989:80
-    volumes:
-      - .:/var/www/html
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - laravel
-
-  mysql_db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: twitter_clone
-    ports:
-      - 3307:3306
   
-  phpmyadmin:
-    image: phpmyadmin:latest
-    ports:
-      - 9001:80
+  #PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: habib/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
     environment:
-      - PMA_ARBITRARY=1
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
 
-  # verify later
-  # minio:
-  #   image: 'minio/minio:latest'
-  #   ports:
-  #     - 5000:5000
-  #     - 4900:4900
-  #   environment:
-  #     MINIO_ROOT_USER: 'root'
-  #     MINIO_ROOT_PASSWORD: 'root'
-  #   volumes:
-  #     - 'minio_data:/data/minio'
-  #   command: minio server /data/minio --console-address ":4900"
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-  #     retries: 3
-  #     timeout: 5s
+  #Nginx
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8989:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/:/etc/nginx/conf.d/
+    networks:
+      - app-network
 
+  #MySQL
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+#Networks
+networks:
+  app-network:
+    driver: bridge
+    
+#Volumes
 volumes:
-  minio_data:
+  dbdata:
+    driver: local
