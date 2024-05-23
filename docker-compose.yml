@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: habib/php
+    image: thomz/php
     container_name: app
     restart: unless-stopped
     tty: true
@@ -20,19 +20,25 @@ services:
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
+    depends_on:
+      - db
+    entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
+    # command: "sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
     
   # NPM
   npm:  
     image: node:latest
     container_name: npm
-    restart: unless-stopped
+    restart: no
     tty: true
     working_dir: /var/www
-    entrypoint: ["npm"]
+    command: sh -c "npm install && npm run build"
     volumes: 
       - "./:/var/www"
     networks:
       - app-network
+    depends_on:
+      - app # depends of php to build front-end
 
   #Nginx
   webserver:
@@ -48,6 +54,8 @@ services:
       - ./nginx/:/etc/nginx/conf.d/
     networks:
       - app-network
+    depends_on:
+      - app
 
   #MySQL
   db:
