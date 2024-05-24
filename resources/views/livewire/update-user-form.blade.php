@@ -69,7 +69,9 @@
                     <p class="text-sm text-red-600">{{ $message }}</p>
                 @enderror
 
-                <button 
+                <button
+                    wire.loading.remove
+                    wire:target="profile_img_url, background_img_url"
                     class="self-center mt-6 py-2 w-full sm:w-[30%] text-purple-600 text-sm font-semibold rounded-full border border-purple-600 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-purple-200 transition ease-in duration-300 px-4 py-1"
                     type="submit"
                 >
