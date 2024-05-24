@@ -41,13 +41,13 @@ class UpdateUserForm extends Component
         $profile_img_url = null;
         if ($this->profile_img) {
             $profile_img_url = $this->profile_img->store('profile_img', 's3');
-            $profile_img_url = 'https://mdwitter.s3.amazonaws.com/' . $profile_img_url;
+            $profile_img_url = 'http://localhost:8900/mdwitter/' . $profile_img_url;
         }
 
         $background_img_url = null;
         if ($this->background_img) {
             $background_img_url = $this->background_img->store('background_img', 's3');
-            $background_img_url = 'https://mdwitter.s3.amazonaws.com/' . $background_img_url;
+            $background_img_url = 'http://localhost:8900/mdwitter/' . $background_img_url;
         }
 
         $this->user->update([
@@ -58,7 +58,7 @@ class UpdateUserForm extends Component
 
         if (isset($profile_img_url)) {
             try {
-                Storage::disk('s3')->delete(substr($this->user->img_url, strlen('https://mdwitter.s3.amazonaws.com/')));
+                Storage::disk('s3')->delete(substr($this->user->img_url, strlen('http://localhost:8900/mdwitter/')));
             } catch (\Exception $e) {}
             $this->user->update([
                 'img_url' => $profile_img_url
@@ -67,7 +67,7 @@ class UpdateUserForm extends Component
 
         if (isset($background_img_url)) {
             try {
-                Storage::disk('s3')->delete(substr($this->user->background_url, strlen('https://mdwitter.s3.amazonaws.com/')));
+                Storage::disk('s3')->delete(substr($this->user->background_url, strlen('http://localhost:8900/mdwitter/')));
             } catch (\Exception $e) {}
             $this->user->update([
                 'background_url' => $background_img_url

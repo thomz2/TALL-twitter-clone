@@ -1,6 +1,6 @@
 services:
   
-  #PHP
+  # PHP
   app:
     build:
       context: .
@@ -21,6 +21,7 @@ services:
       - app-network
     depends_on:
       - db
+      - minio
     entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
     
   # NPM
@@ -38,14 +39,15 @@ services:
     depends_on:
       - app # depends of php to build front-end
 
-  #Nginx
+  # Nginx
   webserver:
     image: nginx:alpine
     container_name: webserver
     restart: unless-stopped
     tty: true
     ports:
-      - "80:80"
+      # - "80:80"
+      - "8989:80"
       - "443:443"
     volumes:
       - ./:/var/www
@@ -55,7 +57,7 @@ services:
     depends_on:
       - app
 
-  #MySQL
+  # MySQL
   db:
     image: mysql:5.7.22
     container_name: db
@@ -73,6 +75,30 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
+
+  # MinIO
+  minio:
+    image: 'bitnami/minio:latest'
+    ports:
+      # - '${FORWARD_MINIO_PORT:-9001}:9001'
+      # - '${FORWARD_MINIO_CONSOLE_PORT:-9000}:9000'
+      - '8900:8900'
+      - '9004:9004'
+    networks:
+      - app-network
+    # command: minio server /data/minio --console-address ":${FORWARD_MINIO_CONSOLE_PORT:-8900}" --address ":${FORWARD_MINIO_PORT:-9001}"
+    volumes:
+      - './minio:/data/minio'
+    environment:
+      - MINIO_ROOT_USER=thomz
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DEFAULT_BUCKETS=mdwitter
+      - MINIO_API_PORT_NUMBER=8900
+      - MINIO_CONSOLE_PORT_NUMBER=9004
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/minio/health/live"]
+      retries: 3
+      timeout: 5s
 
 #Networks
 networks:
