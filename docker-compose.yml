@@ -99,6 +99,19 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:9001/minio/health/live"]
       retries: 3
       timeout: 5s
+  
+  # MinIO Cli
+  # createbuckets:
+  #   image: minio/mc
+  #   depends_on:
+  #     - minio
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     /usr/bin/mc alias set myminio http://minio:9000 minio minio123;
+  #     /usr/bin/mc mb myminio/somebucketname;
+  #     /usr/bin/mc policy set public myminio/somebucketname;
+  #     exit 0;
+  #     "
 
 #Networks
 networks:
