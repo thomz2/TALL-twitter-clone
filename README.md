@@ -28,44 +28,51 @@
 		  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
 		  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 		  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-		sudo apt-get update
-		# ```
+		sudo apt-get update```
 	- ```sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin```
 	- Teste: `sudo docker run hello-world`
 - ##### Docker Compose
 	- ```
-	sudo apt-get update
-	sudo apt-get install docker-compose-plugin
-			# ```
+        sudo apt-get update
+	    sudo apt-get install docker-compose-plugin
+      ```
 - ##### Git
 	- `sudo apt-get install git`
 	
 ### Depois de instalar
-- `git clone -b docker-compose https://github.com/thomz2/tall-twitter-clone.git`
-- `cd tall-twitter-clone/`
-- `cp .env.example .env`
-- `nano .env`
-	- Colocar credenciais da AWS para funcionamento do DynamoDB: ![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
+- ```
+     git clone -b docker-compose https://github.com/thomz2/tall-twitter-clone.git`
+     cd tall-twitter-clone/
+     cp .env.example .env
+     nano .env
+  ```
+	- Colocar credenciais da AWS para funcionamento do DynamoDB:
+      - ![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
 	- As credenciais do MinIO já estão definidas com base no docker-compose.yaml
-- `sudo docker compose up --build -d`
-- `sudo docker compose exec app composer install`
-- `sudo docker compose exec app php artisan key:generate`
-- `sudo docker compose exec app php artisan migrate`
+- ```
+     sudo docker compose up --build -d
+     sudo docker compose exec app composer install
+     sudo docker compose exec app php artisan key:generate
+     sudo docker compose exec app php artisan migrate
+  ```
 	- se não der certo: `sudo docker compose exec app php artisan migrate:fresh`
 - `sudo docker compose exec app php artisan config:clear`
 
+### Configurando MinIO através de sua interface web
+
 ## Todo
 
-#### [x] user auth<br>
-#### [x] user config<br>
-#### [x] search input<br>
-#### [x] likes logic<br>
-#### [x] profile page<br>
-#### [x] mobile responsivity<br>
-#### [x] followers logic<br>
-#### [x] better UI<br>
-#### [x] Dockerfile and docker-compose<br>
-#### [x] MINIO storage<br>
-#### [x] AWS EC2 docker-compose deploy (markdown explaining in portuguese)<br>
-#### [x] AWS non-relational database for crud logs (DynamoDB)<br>
-#### [ ] Kubernetes based deploy<br>
+- [x] user auth<br>
+- [x] user config<br>
+- [x] search input<br>
+- [x] likes logic<br>
+- [x] profile page<br>
+- [x] mobile responsivity<br>
+- [x] followers logic<br>
+- [x] better UI<br>
+- [x] Dockerfile and docker-compose<br>
+- [x] MINIO storage<br>
+- [x] AWS EC2 docker-compose deploy (markdown explaining in portuguese)<br>
+- [x] AWS non-relational database for crud logs (DynamoDB)<br>
+- [ ] Kubernetes based deploy<br>
+- [ ] Terraform 
