@@ -100,19 +100,6 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8900/minio/health/live"]
       retries: 3
       timeout: 5s
-  
-  # MinIO Cli
-  createbuckets:
-    image: minio/mc
-    depends_on:
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      /usr/bin/mc alias set myminio http://minio:8900 thomz password;
-      /usr/bin/mc mb myminio/mdwitter;
-      /usr/bin/mc policy set public myminio/mdwitter;
-      exit 0;
-      "
 
 #Networks
 networks:
