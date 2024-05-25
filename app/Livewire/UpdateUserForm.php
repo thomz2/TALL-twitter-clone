@@ -43,7 +43,10 @@ class UpdateUserForm extends Component
             $profile_img_url = $this->profile_img->store('profile_img', 's3');
             //                                                          :8900 ONLY FOR PRODUCTION
             $profile_img_url = str_replace(["8989", "80"], "8900", url(":8900/" . "mdwitter/" . $profile_img_url));
-            $profile_img_url[strpos($profile_img_url, ':8') - 1] = '';
+            $posicao = strpos($profile_img_url, ':8');
+            if ($posicao !== false && $posicao > 0) {
+                $profile_img_url = substr_replace($profile_img_url, '', $posicao - 1, 1);
+            }
         }
 
         $background_img_url = null;
@@ -51,7 +54,10 @@ class UpdateUserForm extends Component
             $background_img_url = $this->background_img->store('background_img', 's3');
             //                                                             :8900 ONLY FOR PRODUCTION
             $background_img_url = str_replace(["8989", "80"], "8900", url(":8900/" . "mdwitter/" . $background_img_url));
-            $background_img_url[strpos($background_img_url, ':8') - 1] = '';
+            $posicao = strpos($background_img_url, ':8');
+            if ($posicao !== false && $posicao > 0) {
+                $background_img_url = substr_replace($background_img_url, '', $posicao - 1, 1);
+            }
         }
 
         $this->user->update([
