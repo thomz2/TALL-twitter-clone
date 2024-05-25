@@ -11,8 +11,7 @@
 
 ### Instância EC2
 
-- Adicionar regras de entrada no grupo de segurança da instância, para assim acessar o MinIO:
-	- ![Pasted image 20240524194451](https://github.com/thomz2/tall-twitter-clone/assets/82160387/daed0f07-d881-4423-a049-6df39411ab5d)
+- Adicionar regras de entrada no grupo de segurança da instância, para assim acessar o MinIO:<br>![Pasted image 20240524194451](https://github.com/thomz2/tall-twitter-clone/assets/82160387/daed0f07-d881-4423-a049-6df39411ab5d)
 ### Instalando coisas na maquina
 - ##### Docker Engine
 	- `for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done`
@@ -32,10 +31,7 @@
 	- ```sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin```
 	- Teste: `sudo docker run hello-world`
 - ##### Docker Compose
-	- ```
-        sudo apt-get update
-	    sudo apt-get install docker-compose-plugin
-      ```
+	- `sudo apt-get install docker-compose-plugin`
 - ##### Git
 	- `sudo apt-get install git`
 	
@@ -46,8 +42,7 @@
      cp .env.example .env
      nano .env
   ```
-	- Colocar credenciais da AWS para funcionamento do DynamoDB:
-      - ![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
+	- Colocar credenciais da AWS para funcionamento do DynamoDB:<br>![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
 	- As credenciais do MinIO já estão definidas com base no docker-compose.yml
 - ```
      sudo docker compose up --build -d
