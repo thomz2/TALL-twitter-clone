@@ -48,7 +48,7 @@
   ```
 	- Colocar credenciais da AWS para funcionamento do DynamoDB:
       - ![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
-	- As credenciais do MinIO já estão definidas com base no docker-compose.yaml
+	- As credenciais do MinIO já estão definidas com base no docker-compose.yml
 - ```
      sudo docker compose up --build -d
      sudo docker compose exec app composer install
