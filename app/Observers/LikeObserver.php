@@ -28,7 +28,7 @@ class LikeObserver
         ]);
 
         $result = $dynamoDb->scan([
-            'TableName' => 'mdwitter-logs',
+            'TableName' => 'mdwitter-logs2',
         ]);
         
         $log_id = strval(count($result["Items"]));
@@ -45,7 +45,7 @@ class LikeObserver
         $dadosFormatados = $marshaler->marshalItem($item);
 
         $dynamoDb->putItem([
-            'TableName' => 'mdwitter-logs',
+            'TableName' => 'mdwitter-logs2',
             'Item' => $dadosFormatados,
         ]);
         
@@ -69,7 +69,7 @@ class LikeObserver
         ]);
 
         $result = $dynamoDb->scan([
-            'TableName' => 'mdwitter-logs',
+            'TableName' => 'mdwitter-logs2',
         ]);
         
         $log_id = strval(count($result["Items"]));
@@ -86,7 +86,7 @@ class LikeObserver
         $dadosFormatados = $marshaler->marshalItem($item);
 
         $dynamoDb->putItem([
-            'TableName' => 'mdwitter-logs',
+            'TableName' => 'mdwitter-logs2',
             'Item' => $dadosFormatados,
         ]);
     }
