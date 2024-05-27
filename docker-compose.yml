@@ -22,7 +22,6 @@ services:
     depends_on:
       - db
       - minio
-      - createbuckets
     entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
     
   # NPM
