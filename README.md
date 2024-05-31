@@ -11,7 +11,7 @@
 
 ### Instância EC2
 - Primeiramente criaremos uma instância EC2 com a imagem ubuntu server:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/ba9edce1-c492-45fe-88e3-fcad88039959)
-- Após isso, nas configurações de rede, devemos permitir os tráfegos e clicar em editar:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/7c10da2a-85a0-464b-b720-305c69b3b933)
+- Após isso, nas configurações de rede, devemos permitir os tráfegos e clicar em editar (no primeiro passo, o tráfego ssh e http devem estar ativados):<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/7c10da2a-85a0-464b-b720-305c69b3b933)
 - E por fim adicionar mais regras de tráfego para conseguirmos acessar o MinIO após o deploy:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/4f4bddc5-fd68-48e3-96b7-6363680e0863)
 - A instância está pronta para ser executada
 - É necessário também a criação de uma tabela no DynamoDB e um usuário no IAM (não conseguimos acessar o DynamoDB através da conta academy)
@@ -85,7 +85,7 @@
 - [x] better UI<br>
 - [x] Dockerfile and docker-compose<br>
 - [x] MINIO storage<br>
-- [x] AWS EC2 docker-compose deploy (markdown explaining in portuguese)<br>
+- [x] AWS EC2 docker-compose deploy (explanation in portuguese)<br>
 - [x] AWS non-relational database for crud logs (DynamoDB)<br>
-- [ ] Kubernetes based deploy<br>
-- [ ] Terraform 
+- [ ] Kubernetes based deploy (**INCOMPLETE**)<br>
+- [ ] Terraform (**NOT DONE**)
