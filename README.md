@@ -6,15 +6,14 @@
     <p color="gray">Tailwind, Alpine.JS, Laravel, Livewire</p>
 </div>
 
-## Deploy usando docker-compose em uma instância EC2 da AWS
-
+## Deploy usando docker-compose em uma instância EC2 da AWS.
 
 ### Instância EC2
 - Primeiramente criaremos uma instância EC2 com a imagem ubuntu server:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/ba9edce1-c492-45fe-88e3-fcad88039959)
 - Após isso, nas configurações de rede, devemos permitir os tráfegos e clicar em editar (no primeiro passo, o tráfego ssh e http devem estar ativados):<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/7c10da2a-85a0-464b-b720-305c69b3b933)
 - E por fim adicionar mais regras de tráfego para conseguirmos acessar o MinIO após o deploy:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/4f4bddc5-fd68-48e3-96b7-6363680e0863)
-- A instância está pronta para ser executada
-- É necessário também a criação de uma tabela no DynamoDB e um usuário no IAM (não conseguimos acessar o DynamoDB através da conta academy)
+- A instância está pronta para ser executada.
+- É necessário também a criação de uma tabela no DynamoDB e um usuário no IAM (não conseguimos acessar o DynamoDB através da conta academy).
 
 ### DynamoDB
 - Criaremos apenas uma tabela para armazenar os logs de CRUD e na criação o nome e a chave de partição devem ser as seguintes:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/c16c8c55-8acc-4ba0-b0ec-70a920654db6)
@@ -24,7 +23,7 @@
 - Por simplicidade, criaremos um usuário no IAM com acesso total ao DynamoDB:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/f52293e6-bea2-4f62-84e7-15e165b3ff3a)
 
 ### Instalando coisas na maquina
-- Após a execução da instância, entraremos na máquina e faremos a instalação do que é necessário para executar o projeto
+- Após a execução da instância, entraremos na máquina e faremos a instalação do que é necessário para executar o projeto.
 - ##### Docker Engine
     - [Seguiremos o passo a passo oficial para a instalação do docker.](https://docs.docker.com/engine/install/ubuntu/)
     - Esse primeiro comando irá remover possíveis pacotes conflitantes da máquina, colocamos ele aqui apenas por desencargo de consciência, visto que pode ser considerado um comando pulável já que a máquina está vazia.
@@ -61,8 +60,8 @@
          nano .env
       ```
 - Colocaremos as credenciais da AWS para funcionamento do DynamoDB:<br>![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
-- As credenciais do MinIO e do MySQL já estão definidas com base no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml)
-- Agora buildaremos e subiremos nossos containers
+- As credenciais do MinIO e do MySQL já estão definidas com base no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml).
+- Agora buildaremos e subiremos nossos containers:
     - `sudo docker compose up --build -d`
     - Obs.: os serviços podem estar rodando mas a configuração total só é feita quando o container `php_commands` termina sua execução.
 
@@ -71,7 +70,7 @@
 - Após isso, basta colocar o login e senha definidos no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml) e se autenticar.
 - Por fim, tornaremos o nosso bucket padrão (que também já foi definido no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml)) público:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/9f9bed84-6f8e-40ce-9cb4-8d359169c00d)
 
-### E assim, a aplicação está pronta para ser usada!
+### E assim, a aplicação está pronta para ser usada! Basta acessar o ip público da instância ou seu dns público.
 
 ## Todo
 
