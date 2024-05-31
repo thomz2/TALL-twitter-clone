@@ -6,6 +6,22 @@
     <p color="gray">Tailwind, Alpine.JS, Laravel, Livewire</p>
 </div>
 
+Tabela de conteúdos
+=================
+<!--ts-->
+   * [Deploy](#🌐%20Deploy%20usando%20docker-compose%20em%20uma%20instância%20EC2%20da%20AWS)
+   * [Tabela de Conteudo](#tabela-de-conteudo)
+   * [Instalação](#instalacao)
+   * [Como usar](#como-usar)
+      * [Pre Requisitos](#pre-requisitos)
+      * [Local files](#local-files)
+      * [Remote files](#remote-files)
+      * [Multiple files](#multiple-files)
+      * [Combo](#combo)
+   * [Tests](#testes)
+   * [Tecnologias](#tecnologias)
+<!--te-->
+
 ## 🌐 Deploy usando docker-compose em uma instância EC2 da AWS
 
 ### Instância EC2
