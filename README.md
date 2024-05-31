@@ -6,7 +6,7 @@
     <p color="gray">Tailwind, Alpine.JS, Laravel, Livewire</p>
 </div>
 
-## Deploy usando docker-compose em uma instância EC2 da AWS.
+## Deploy usando docker-compose em uma instância EC2 da AWS
 
 ### Instância EC2
 - Primeiramente criaremos uma instância EC2 com a imagem ubuntu server:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/ba9edce1-c492-45fe-88e3-fcad88039959)
