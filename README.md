@@ -8,13 +8,13 @@
 
 ## 👋 O projeto e features
 
-O projeto consiste em um clone do Twitter desenvolvido utilizando a TALL stack (Tailwind CSS, Alpine.js, Laravel e Livewire). Ele oferece aos usuários a capacidade de postar tweets com formatação em Markdown e personalização das cores de fundo e texto. Algumas das funcionalidades principais implementadas incluem autenticação de usuário, configurações individuais para os usuários, uma barra de pesquisa para encontrar outros usuários, sistema de curtidas, páginas de perfil, responsividade para dispositivos móveis e lógica de seguidores e likes. Além disso, o projeto utiliza Docker para facilitar a implantação e o docker-compose para gerenciar os contêineres (A implantação com base em cluster do K8s ainda está em [desenvolvimento](https://github.com/thomz2/tall-twitter-clone/tree/docker-compose/k8s). O armazenamento de arquivos é realizado utilizando o MinIO. Além disso, o projeto utiliza um banco de dados não-relacional na AWS (DynamoDB) para registros CRUD.
+O projeto consiste em um clone do Twitter desenvolvido utilizando a TALL stack (Tailwind CSS, Alpine.js, Laravel e Livewire). Ele oferece aos usuários a capacidade de postar tweets com formatação em Markdown e personalização das cores de fundo e texto. Algumas das funcionalidades principais implementadas incluem autenticação de usuário, configurações individuais para os usuários, uma barra de pesquisa para encontrar outros usuários, sistema de curtidas, páginas de perfil, responsividade para dispositivos móveis e lógica de seguidores e likes. Além disso, o projeto utiliza Docker para facilitar a implantação e o docker-compose para gerenciar os containers (A implantação com base em cluster do K8s ainda está em [desenvolvimento](https://github.com/thomz2/tall-twitter-clone/tree/docker-compose/k8s). O armazenamento de arquivos é realizado utilizando o MinIO. Além disso, o projeto utiliza um banco de dados não-relacional na AWS (DynamoDB) para registros CRUD.
 
 ## 🐳 Docker
 
-Através da [Dockerfile](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/Dockerfile) criamos uma imagem que contém todas as dependências necessárias para executar uma aplicação Laravel, como PHP, extensões do PHP, Composer e configurações de permissões de usuário. Essa imagem é usada como base para os contêineres do projeto, garantindo que todas as dependências estejam presentes e configuradas corretamente.<br>
+Através da [Dockerfile](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/Dockerfile) criamos uma imagem que contém todas as dependências necessárias para executar uma aplicação Laravel, como PHP, extensões do PHP, Composer e configurações de permissões de usuário. Essa imagem é usada como base para os containers do projeto, garantindo que todas as dependências estejam presentes e configuradas corretamente.<br>
 
-Enquanto que com o [docker-compose](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml), descrevemos como os contêineres do projeto serão criados e conectados entre si.
+Enquanto que com o [docker-compose](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml), descrevemos como os containers do projeto serão criados e conectados entre si.
 - **app**: Contém o PHP-FPM e Laravel. É onde a aplicação Laravel é executada.
 - **php_commands**: Um container separado para executar comandos de inicialização do Laravel, como a instalação de dependências do Composer, geração de chave, migrações de banco de dados e limpeza de configurações.
 - **npm**: Contém o Node.js para buildar recursos front-end, como JavaScript e CSS.
@@ -22,7 +22,7 @@ Enquanto que com o [docker-compose](https://github.com/thomz2/tall-twitter-clone
 - **db**: Contém o MySQL como banco de dados relacional.
 - **minio**: Armazena arquivos utilizando o MinIO, um serviço de armazenamento de objetos compatível com a API S3.
 
-A imagem thomz/php é usada tanto para o contêiner app quanto para o php_commands. Ela é construída com base no Dockerfile fornecido, que configura o ambiente PHP necessário para executar o Laravel. O contêiner php_commands executa os comandos de inicialização do Laravel e depois é desligado, enquanto o app continua em execução para servir a aplicação.
+A imagem thomz/php é usada tanto para o container app quanto para o php_commands. Ela é construída com base no Dockerfile fornecido, que configura o ambiente PHP necessário para executar o Laravel. O container php_commands executa os comandos de inicialização do Laravel e depois é desligado, enquanto o app continua em execução para servir a aplicação.
 
 ## 🌐 Deploy usando docker-compose em uma instância EC2 da AWS
 
