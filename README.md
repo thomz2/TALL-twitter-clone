@@ -67,6 +67,11 @@
     - Obs.: os serviços podem estar rodando mas a configuração total só é feita quando o container `php_commands` termina sua execução.
 
 ### Configurando MinIO através de sua interface web
+- Primeiramente, vamos acessar o painel do MinIO através da web, para isso, devemos acessar o link: `http://<ip_publico_instancia>:9004/login`:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/5b7dda55-9a30-4a68-9222-0e0a2ba8211d)
+- Após isso, basta colocar o login e senha definidos no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml) e se autenticar.
+- Por fim, tornaremos o nosso bucket padrão (que também já foi definido no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml)) público:<br>![image](https://github.com/thomz2/tall-twitter-clone/assets/82160387/9f9bed84-6f8e-40ce-9cb4-8d359169c00d)
+
+### E assim, a aplicação está pronta para ser usada!
 
 ## Todo
 
