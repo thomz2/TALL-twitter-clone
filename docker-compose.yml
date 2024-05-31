@@ -14,15 +14,31 @@ services:
       SERVICE_TAGS: dev
     working_dir: /var/www
     volumes:
-      - ./:/var/www
       # host:container
+      - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
     depends_on:
       - db
       - minio
-    entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
+    # Esse comando não estava funcionando, então criei um container que apenas executa isso e depois morre logo abaixo
+    # entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
+
+  php_commands:
+    image: thomz/php
+    container_name: php_commands
+    restart: "no"
+    tty: true
+    command: sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+    depends_on:
+      - app
+
     
   # NPM
   npm:  
