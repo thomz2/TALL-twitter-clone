@@ -53,7 +53,7 @@
 	- Instalação: `sudo apt-get install git`
 	
 ### Depois de instalar
-- Após a instalação dos recursos necessários, faremos um clone do repositório do projeto
+- Após a instalação dos recursos necessários, faremos um clone do repositório do projeto e editaremos o ambiente dele através do nano:
     - ```
          git clone -b docker-compose https://github.com/thomz2/tall-twitter-clone.git
          cd tall-twitter-clone/
@@ -61,16 +61,10 @@
          nano .env
       ```
 - Colocaremos as credenciais da AWS para funcionamento do DynamoDB:<br>![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
-- As credenciais do MinIO já estão definidas com base no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml)
+- As credenciais do MinIO e do MySQL já estão definidas com base no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml)
 - Agora buildaremos e subiremos nossos containers
-    - ```
-         sudo docker compose up --build -d
-         sudo docker compose exec app composer install
-         sudo docker compose exec app php artisan key:generate
-         sudo docker compose exec app php artisan migrate
-      ```
-	    - Se não der certo, troque a última linha por: `sudo docker compose exec app php artisan migrate:fresh`
-    - Por fim: `sudo docker compose exec app php artisan config:clear`
+    - `sudo docker compose up --build -d`
+    - Obs.: os serviços podem estar rodando mas a configuração total só é feita quando o container `php_commands` termina sua execução.
 
 ### Configurando MinIO através de sua interface web
 
