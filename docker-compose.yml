@@ -22,13 +22,9 @@ services:
     depends_on:
       - db
       - minio
-    # Esse comando não estava funcionando, então criei um container que apenas executa isso e depois morre logo abaixo
-    # entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
 
+  # Container separado com finalidade de executar comandos para a inicialização do projeto laravel
   php_commands:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
     image: thomz/php
     container_name: php_commands
     restart: "no"
@@ -42,18 +38,6 @@ services:
       - app-network
     depends_on:
       - app
-
-# createbuckets:
-#     image: minio/mc
-#     depends_on:
-#       - minio
-#     entrypoint: >
-#       /bin/sh -c "
-#       /usr/bin/mc alias set myminio http://minio:8900 thomz password;
-#       /usr/bin/mc mb myminio/mdwitter;
-#       /usr/bin/mc policy set public myminio/mdwitter;
-#       exit 0;
-#       "
     
   # NPM
   npm:  
@@ -111,13 +95,10 @@ services:
   minio:
     image: 'bitnami/minio:latest'
     ports:
-      # - '${FORWARD_MINIO_PORT:-9001}:9001'
-      # - '${FORWARD_MINIO_CONSOLE_PORT:-9000}:9000'
       - '8900:8900'
       - '9004:9004'
     networks:
       - app-network
-    # command: minio server /data/minio --console-address ":${FORWARD_MINIO_CONSOLE_PORT:-8900}" --address ":${FORWARD_MINIO_PORT:-9001}"
     volumes:
       - './minio:/data/minio'
     environment:
