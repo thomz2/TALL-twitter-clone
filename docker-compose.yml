@@ -31,7 +31,7 @@ services:
     restart: "no"
     tty: true
     # command: sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
-    entrypoint: /bin/sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
+    entrypoint: /bin/sh -c "php-fpm && composer install && php artisan key:generate && php artisan migrate && php artisan config:clear"
     volumes:
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
