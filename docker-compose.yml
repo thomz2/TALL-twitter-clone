@@ -30,7 +30,8 @@ services:
     container_name: php_commands
     restart: "no"
     tty: true
-    command: sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
+    # command: sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
+    entrypoint: /bin/sh -c "php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear"
     volumes:
       - ./:/var/www
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
@@ -39,6 +40,17 @@ services:
     depends_on:
       - app
 
+# createbuckets:
+#     image: minio/mc
+#     depends_on:
+#       - minio
+#     entrypoint: >
+#       /bin/sh -c "
+#       /usr/bin/mc alias set myminio http://minio:8900 thomz password;
+#       /usr/bin/mc mb myminio/mdwitter;
+#       /usr/bin/mc policy set public myminio/mdwitter;
+#       exit 0;
+#       "
     
   # NPM
   npm:  
