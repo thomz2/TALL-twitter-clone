@@ -26,14 +26,14 @@ services:
     # entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
 
   php_commands:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: thomz/php2
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: thomz/php
     container_name: php_commands
     restart: "no"
     tty: true
-    command: sh -c "composer install && php artisan key:generate && php artisan migrate && php artisan config:clear"
+    command: sh -c "composer install && php artisan key:generate && php artisan migrate:fresh && php artisan config:clear"
     # entrypoint: /bin/sh -c "composer install && php artisan key:generate && php artisan migrate && php artisan config:clear"
     volumes:
       - ./:/var/www
