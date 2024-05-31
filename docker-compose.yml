@@ -26,7 +26,7 @@ services:
     # entrypoint: sh -c php-fpm && php artisan key:generate && php artisan migrate && php artisan config:clear
 
   php_commands:
-    image: thomz/php
+    image: php:8.2-fpm
     container_name: php_commands
     restart: "no"
     tty: true
