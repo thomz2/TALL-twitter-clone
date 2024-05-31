@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - name: php
+        image: thomz/php
+        volumeMounts:
+          - name: app-volume
+            mountPath: /var/www
+        ports:
+          - containerPort: 80
+      volumes:
+        - name: app-volume
+          emptyDir: {}

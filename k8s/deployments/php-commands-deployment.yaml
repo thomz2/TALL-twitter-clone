@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-commands-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-commands
+  template:
+    metadata:
+      labels:
+        app: php-commands
+    spec:
+      containers:
+      - name: php-commands
+        image: thomz/php
+        command: ["/bin/sh", "-c"]
+        args:
+          - composer install && php artisan key:generate && php artisan migrate:fresh && php artisan config:clear
+        volumeMounts:
+          - name: app-volume
+            mountPath: /var/www
+      volumes:
+        - name: app-volume
+          emptyDir: {}

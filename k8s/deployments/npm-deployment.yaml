@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: npm-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: npm
+  template:
+    metadata:
+      labels:
+        app: npm
+    spec:
+      containers:
+      - name: npm
+        image: node:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - npm install && npm run build
+        volumeMounts:
+          - name: app-volume
+            mountPath: /var/www
+      volumes:
+        - name: app-volume
+          emptyDir: {}
