@@ -77,7 +77,7 @@ A imagem thomz/php é usada tanto para o container app quanto para o php_command
          cp .env.example .env
          nano .env
       ```
-- Colocaremos as credenciais da AWS para funcionamento do DynamoDB:<br>![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
+- Colocaremos as credenciais do usuário IAM criado para funcionamento do DynamoDB:<br>![Pasted image 20240524192522](https://github.com/thomz2/tall-twitter-clone/assets/82160387/a9342ffb-8952-407b-9eda-8e546ab6802f)
 - As credenciais do MinIO e do MySQL já estão definidas com base no [docker-compose.yml](https://github.com/thomz2/tall-twitter-clone/blob/docker-compose/docker-compose.yml).
 - Agora buildaremos e subiremos nossos containers:
     - `sudo docker compose up --build -d`
